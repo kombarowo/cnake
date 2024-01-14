@@ -22,32 +22,48 @@ void disableRAWMode();
 void enableRAWMode();
 void *waitForKeyboardHit();
 
+void move(struct snake_char *el)
+{
+    switch (el->direction)
+    {
+    case 'd':
+        el->x++;
+        break;
+    case 'a':
+        el->x--;
+        break;
+    case 's':
+        el->y++;
+        break;
+    case 'w':
+        el->y--;
+        break;
+    }
+}
+
 int main()
 {
-    // Start Multithreading
     pthread_t id_read;
 
     pthread_create(&id_read, NULL, waitForKeyboardHit, NULL);
 
     struct snake_char snake_head;
 
-    snake_head.x = 2;
+    snake_head.x = 10;
     snake_head.y = 0;
     snake_head.direction = 'd';
 
+    /* TODO: implement malloc to dynamic length */
     struct snake_char snake_tail[10];
 
-    snake_tail[0].x = 1;
+    /* TODO: implement initial snake state */
+    snake_tail[0].x = 9;
     snake_tail[0].y = 0;
     snake_tail[0].direction = 'd';
 
-    snake_tail[1].x = 0;
-    snake_tail[1].y = 0;
-    snake_tail[1].direction = 'd';
-
     while (1)
     {
-        sleep(1);
+        usleep(1000 * 1000 * 1);
 
         system("clear");
 
@@ -59,67 +75,31 @@ int main()
 
         snake_head.direction = lastCharHitted;
 
-        switch (snake_head.direction)
+        /* Move head and tail */
+        move(&snake_head);
+        for (int i = 0; i < sizeof(snake_tail) / sizeof(snake_head); i++)
         {
-        case 'd':
-            snake_head.x++;
-            break;
-        case 'a':
-            snake_head.x--;
-            break;
-        case 's':
-            snake_head.y++;
-            break;
-        case 'w':
-            snake_head.y--;
-            break;
+            move(&snake_tail[i]);
         }
-        switch (snake_tail[0].direction)
+        /* Set direction for tail */
+        for (int i = sizeof(snake_tail) / sizeof(snake_head) - 1; i > 0; i--)
         {
-        case 'd':
-            snake_tail[0].x++;
-            break;
-        case 'a':
-            snake_tail[0].x--;
-            break;
-        case 's':
-            snake_tail[0].y++;
-            break;
-        case 'w':
-            snake_tail[0].y--;
-            break;
+            snake_tail[i].direction = snake_tail[i - 1].direction;
         }
-
-        switch (snake_tail[1].direction)
-        {
-        case 'd':
-            snake_tail[1].x++;
-            break;
-        case 'a':
-            snake_tail[1].x--;
-            break;
-        case 's':
-            snake_tail[1].y++;
-            break;
-        case 'w':
-            snake_tail[1].y--;
-            break;
-        }
-
-        snake_tail[1].direction = snake_tail[0].direction;
         snake_tail[0].direction = snake_head.direction;
 
+        /* Draw */
         for (int y = 0; y < SCREEN_HEIGHT; y++)
         {
             for (int x = 0; x < SCREEN_WIDTH; x++)
             {
                 if (x == snake_head.x && y == snake_head.y)
                 {
-                    // printf("%c", lastCharHitted);
                     printf("X");
                     continue;
                 }
 
+                /* TODO: Calc count of tail by pointer ^ */
                 if (x == snake_tail[0].x && y == snake_tail[0].y)
                 {
                     printf("#");
@@ -127,6 +107,18 @@ int main()
                 }
 
                 if (x == snake_tail[1].x && y == snake_tail[1].y)
+                {
+                    printf("#");
+                    continue;
+                }
+
+                if (x == snake_tail[2].x && y == snake_tail[2].y)
+                {
+                    printf("#");
+                    continue;
+                }
+
+                if (x == snake_tail[3].x && y == snake_tail[3].y)
                 {
                     printf("#");
                     continue;
