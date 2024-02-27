@@ -21,7 +21,7 @@ void render_game_run(game_t *game, snake_t *head, food_t *food)
                 ch = TEXTURE_FOOD;
             }
 
-            if (is_snake_head(x, y, game, head, food))
+            if (is_snake_head(x, y, head))
             {
                 ch = TEXTURE_SNAKE_HEAD;
             }
@@ -47,6 +47,8 @@ void render_game_run(game_t *game, snake_t *head, food_t *food)
     printf("Head X, Y: %i, %i\n", head->x, head->y);
     printf("Food X, Y: %i, %i\n", food->x, food->y);
     printf("Snake size: %i / %i\n", game->snake_length, SNAKE_MAX_LENGTH);
+
+    update_game_state(game, head, food);
 }
 
 void render_game_lose(game_t *game, snake_t *head, food_t *food)

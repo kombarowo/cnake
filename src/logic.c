@@ -38,32 +38,28 @@ bool is_snake_tail(unsigned short int x, unsigned short int y, game_t *game, sna
 
     return false;
 }
-bool is_snake_head(unsigned short int x, unsigned short int y, game_t *game, snake_t *head, food_t *food)
+bool is_snake_head(unsigned short int x, unsigned short int y, snake_t *head)
 {
-    if (x == head->x && y == head->y)
+    return x == head->x && y == head->y;
+}
+void update_game_state(game_t *game, snake_t *head, food_t *food)
+{
+    if (is_snake_tail(head->x, head->y, game, head))
     {
-        if (is_food(x, y, food))
-        {
-            snake_add(game, head);
-
-            /* TODO: prevent collision with snake */
-            food_spawn(game, food);
-
-            return true;
-        }
-
-        if (is_snake_tail(x, y, game, head))
-        {
-            game->state = GAME_STATE_LOSE;
-        }
-
-        if (game->snake_length == SNAKE_MAX_LENGTH)
-        {
-            game->state = GAME_STATE_WIN;
-        }
-
-        return true;
+        game->state = GAME_STATE_LOSE;
     }
 
-    return false;
+    if (is_food(head->x, head->y, food))
+    {
+        snake_add(game, head);
+
+        do {
+            food_spawn(game, food);
+        } while (is_snake_tail(food->x, food->y, game, head));
+    }
+
+    if (game->snake_length == SNAKE_MAX_LENGTH)
+    {
+        game->state = GAME_STATE_WIN;
+    }
 }
