@@ -53,17 +53,21 @@ void render_game_run(game_t *game, snake_t *head, food_t *food)
 
 void render_game_lose(game_t *game, snake_t *head, food_t *food)
 {
+    system("clear");
     printf("You died.\n");
+    exit(0);
 }
 
 void render_game_win(game_t *game, snake_t *head, food_t *food)
 {
+    system("clear");
     printf("You win!\n");
+    exit(0);
 }
 
 void render_game(game_t *game, snake_t *head, food_t *food)
 {
-    system("clear");
+    puts("\033[0;0H");
 
     switch (game->state)
     {
