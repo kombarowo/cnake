@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 #include <termios.h>
 #include <time.h>
@@ -25,6 +26,8 @@ int main()
 {
     /* TODO: mb find a better place to do that ? */
     srand(time(0));
+
+    system("clear");
 
     pthread_t id_listen_keypress;
     pthread_create(&id_listen_keypress, NULL, listen_keypress, (void *)&game);
