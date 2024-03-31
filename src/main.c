@@ -5,11 +5,11 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "../include/game.h"
-#include "../include/snake.h"
-#include "../include/food.h"
-#include "../include/render.h"
-#include "../include/terminal.h"
+#include "game.h"
+#include "snake.h"
+#include "food.h"
+#include "render.h"
+#include "terminal.h"
 
 game_t game = {
     .state = GAME_STATE_RUN,

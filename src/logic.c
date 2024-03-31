@@ -1,9 +1,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#include "../include/game.h"
-#include "../include/food.h"
-#include "../include/snake.h"
+#include "game.h"
+#include "food.h"
+#include "snake.h"
 
 bool is_x_wall(unsigned short int y)
 {

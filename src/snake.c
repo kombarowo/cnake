@@ -1,5 +1,5 @@
-#include "../include/game.h"
-#include "../include/snake.h"
+#include "game.h"
+#include "snake.h"
 
 char snake_get_direction(game_t *game, snake_t *head)
 {

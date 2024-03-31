@@ -3,8 +3,8 @@
 #include <termios.h>
 #include <pthread.h>
 
-#include "../include/game.h"
-#include "../include/terminal.h"
+#include "game.h"
+#include "terminal.h"
 
 // https://www.opennet.ru/docs/FAQ/programming/unix-programming.html | 3.2 How can I read single characters from the terminal?
 

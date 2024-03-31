@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "../include/game.h"
-#include "../include/snake.h"
-#include "../include/food.h"
-#include "../include/render.h"
-#include "../include/logic.h"
+#include "game.h"
+#include "snake.h"
+#include "food.h"
+#include "render.h"
+#include "logic.h"
 
 void render_game_run(game_t *game, snake_t *head, food_t *food)
 {

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
-#include "../include/game.h"
-#include "../include/food.h"
+#include "game.h"
+#include "food.h"
 
 void food_spawn(game_t *game, food_t *food)
 {
