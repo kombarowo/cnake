@@ -55,7 +55,10 @@ void update_game_state(game_t *game, snake_t *head, food_t *food)
 
         do {
             food_spawn(game, food);
-        } while (is_snake_tail(food->x, food->y, game, head));
+        } while (
+            is_snake_tail(food->x, food->y, game, head) ||
+            is_snake_head(food->x, food->y, head)
+        );
     }
 
     if (game->snake_length == SNAKE_MAX_LENGTH)
