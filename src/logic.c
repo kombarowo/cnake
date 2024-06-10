@@ -42,6 +42,7 @@ bool is_snake_head(unsigned short int x, unsigned short int y, snake_t *head)
 {
     return x == head->x && y == head->y;
 }
+
 void update_game_state(game_t *game, snake_t *head, food_t *food)
 {
     if (is_snake_tail(head->x, head->y, game, head))
